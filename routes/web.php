@@ -23,6 +23,11 @@ Route::group(['middleware'=>['auth']],function (){
     Route::get('/admin/check-pwd','AdminController@checkPwd');
     Route::post('/admin/update-pwd','AdminController@updatePwd');
 
+    Route::resource('/admin/product','ProductController');
+    Route::resource('/admin/category','CategoryController');
+    Route::get('/admin/delete-category/{id}','CategoryController@destroy');
+    Route::get('/admin/delete-product/{id}','ProductController@destroy');
+
 });
 
 Auth::routes();

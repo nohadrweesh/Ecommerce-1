@@ -29,7 +29,7 @@ $(document).ready(function(){
 	
 	$('input[type=checkbox],input[type=radio],input[type=file]').uniform();
 	
-	$('select').select2();
+	//$('select').select2();
 
 	$("#password_validate").validate({
 		rules:{
@@ -60,4 +60,66 @@ $(document).ready(function(){
 			$(element).parents('.control-group').addClass('success');
 		}
 	});
+	$("#add_category").validate({
+		rules:{
+			category_name:{
+				required:true
+			},
+            category_url:{
+                required:true,
+				//url:true
+            },
+		},
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight:function(element, errorClass, validClass) {
+            $(element).parents('.control-group').addClass('error');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).parents('.control-group').removeClass('error');
+            $(element).parents('.control-group').addClass('success');
+        }
+
+	});
+	$("#edit_category").validate({
+		rules:{
+			category_name:{
+				required:true
+			},
+            category_url:{
+                required:true,
+				//url:true
+            },
+		},
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight:function(element, errorClass, validClass) {
+            $(element).parents('.control-group').addClass('error');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).parents('.control-group').removeClass('error');
+            $(element).parents('.control-group').addClass('success');
+        }
+
+	});
+
+    $(document).on('click','.deleteRecord',function(e){
+        var id = $(this).attr('rel');
+        var deleteFunction = $(this).attr('rel1');
+        swal({
+                title: "Are you sure?",
+                text: "Your will not be able to recover this Record Again!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                //closeOnConfirm: false
+         }).then((value)=>{
+            window.location.href="/admin/"+deleteFunction+"/"+id;
+		});
+            // function(){
+        		// alert("hii");
+            //     window.location.href="/admin/"+deleteFunction+"/"+id;
+            // });
+    });
 });
