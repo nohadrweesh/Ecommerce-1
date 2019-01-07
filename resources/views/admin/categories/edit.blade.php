@@ -3,7 +3,7 @@
     <div id="content">
         <div id="content-header">
             <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
-                <a href="{{url('admin/category')}}" >Categories</a><a href="#" class="current">Add Category</a> </div>
+                <a href="{{url('admin/category')}}" >Categories</a><a href="#" class="current">Edit Category</a> </div>
             <h1>Categories</h1>
         </div>
         <div class="container-fluid"><hr>
@@ -11,7 +11,7 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-                            <h5>Add Category</h5>
+                            <h5>Edit Category</h5>
                         </div>
                         <div class="widget-content nopadding">
                             <form class="form-horizontal" method="post" action="{{url('admin/category/'.$category->id)}}" name="edit_category" id="edit_category" novalidate="novalidate">

@@ -23,6 +23,6 @@ class RedirectIfAuthenticated
             return redirect('/admin')->withErrors('Please login to access');
         }
 
-        //return $next($request);
+       // return $next($request);
     }
 }

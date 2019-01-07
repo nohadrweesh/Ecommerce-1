@@ -14,12 +14,12 @@
                         <h5>Add Product</h5>
                     </div>
                     <div class="widget-content nopadding">
-                        <form class="form-horizontal" method="post" action="{{url('admin/product')}}" name="add_product" id="add_product" novalidate="novalidate">
+                        <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{url('admin/product')}}" name="add_product" id="add_product" novalidate="novalidate">
                            {{csrf_field()}}
                             <div class="control-group">
                                 <label class="control-label">Under Category</label>
                                 <div class="controls">
-                                    <select name="category_level" id="category_level">
+                                    <select name="category_id" id="category_id">
                                         <option value="0">Select Category</option>
                                         @foreach($categories as $val=>$key)
                                             <option value="{{$key}}">{{$val}}</option>
@@ -46,9 +46,25 @@
                                 </div>
                             </div>
                             <div class="control-group">
+                                <label class="control-label">Description</label>
+                                <div class="controls">
+                                    <textarea name="product_description" id="product_description" cols="30" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="control-group">
                                 <label class="control-label">Product Price</label>
                                 <div class="controls">
                                     <input type="number" name="product_price" id="product_price">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Image</label>
+                                <div class="controls">
+                                    <div >
+                                        <input name="image" id="image" type="file" size="19"style="opacity: 100 !important;" >
+
+
                                 </div>
                             </div>
 

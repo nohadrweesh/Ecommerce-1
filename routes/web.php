@@ -27,6 +27,8 @@ Route::group(['middleware'=>['auth']],function (){
     Route::resource('/admin/category','CategoryController');
     Route::get('/admin/delete-category/{id}','CategoryController@destroy');
     Route::get('/admin/delete-product/{id}','ProductController@destroy');
+    Route::get('/admin/delete-product-attribute/{id}','ProductController@destroyProductAttribute');
+    Route::post('/admin/product/attribute','ProductController@addProductAttribute');
 
 });
 
