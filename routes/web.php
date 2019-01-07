@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'IndexController@index');
+Route::get('/products/{url}', 'IndexController@getProductsByCategoryUrl');
 Route::get('/admin','AdminController@login');
 Route::get('/logout','AdminController@logout');
 Route::post('/admin','AdminController@doLogin');
