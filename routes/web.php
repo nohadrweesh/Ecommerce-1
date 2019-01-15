@@ -13,6 +13,7 @@
 
 Route::get('/', 'IndexController@index');
 Route::get('/products/{url}', 'IndexController@getProductsByCategoryUrl');
+Route::get('/product/{product_id}', 'IndexController@getProductById');
 Route::get('/admin','AdminController@login');
 Route::get('/logout','AdminController@logout');
 Route::post('/admin','AdminController@doLogin');
@@ -27,7 +28,11 @@ Route::group(['middleware'=>['auth']],function (){
     Route::get('/admin/delete-category/{id}','CategoryController@destroy');
     Route::get('/admin/delete-product/{id}','ProductController@destroy');
     Route::get('/admin/delete-product-attribute/{id}','ProductController@destroyProductAttribute');
+    Route::get('/admin/delete-product-image/{id}','ProductController@destroyProductImage');
     Route::post('/admin/product/attribute','ProductController@addProductAttribute');
+    Route::post('/admin/product/image','ProductController@addProductImages');
+    Route::get('/admin/product/{product_id}/images','ProductController@addProductImage');
+    Route::post('/admin/product/{product_id}/attribute','ProductController@updateProductAttributes');
 
 });
 

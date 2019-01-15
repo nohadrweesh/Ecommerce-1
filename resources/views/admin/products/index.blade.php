@@ -56,11 +56,12 @@
                                         <td>{{$product->product_code}}</td>
                                         <td>{{$product->product_description}}</td>
                                         <td>{{$product->product_price}}</td>
-                                        <td>{{$product->category_id}}</td>
+                                        <td title="{{$product->category_id}}">{{$product->category->category_name}}</td>
                                         <td><img  width="60px" src="{{asset('storage/products/small/'.$product->product_image)}}" alt=""></td>
 
 
                                         <td>
+                                            <a href="{{url('/admin/product/'.$product->id.'/images')}}" class="btn btn-info btn-mini">Add Images</a>
                                             <a href="{{url('/admin/product/'.$product->id)}}" class="btn btn-success btn-mini">View</a>
                                             <a href="{{url('/admin/product/'.$product->id.'/edit')}}" class="btn btn-primary btn-mini">Edit</a>
                                             <a rel="{{ $product->id }}" rel1="delete-product" href="javascript:" class="deleteRecord btn btn-danger btn-mini">Delete</a>

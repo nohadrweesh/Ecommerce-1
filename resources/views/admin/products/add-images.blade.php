@@ -30,7 +30,7 @@
                             <h5>Edit Product</h5>
                         </div>
                         <div class="widget-content nopadding">
-                            <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{url('admin/product/attribute')}}" name="add_product_attr" id="add_product_attr" novalidate="novalidate">
+                            <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{url('admin/product/image')}}" name="add_product_attr" id="add_product_attr" novalidate="novalidate">
                                 {{csrf_field()}}
 
                                 <input name="product_id" type="hidden" value="{{$product->id}}">
@@ -78,18 +78,17 @@
 
                                 </div>
                                 @endif
-                                <div class="control-group field_wrapper">
-                                    <label class="control-label">Product Attributes</label>
+                                <div class="control-group ">
+                                    <label class="control-label">Product Images</label>
                                     <div class="controls">
-                                        <input required type="text" name="sku[]" placeholder="sku"/>
-                                        <input required type="text" name="size[]" placeholder="size"/>
-                                        <input required type="text" name="price[]" placeholder="price"/>
-                                        <input required type="text" name="stock[]" placeholder="stock"/>
-                                        <a href="javascript:void(0);" class="add_button" title="Add field">Add</a>
-                                    </div>
+                                    <div >
+                                        <input name="image[]" id="image" type="file" multiple="" size="19"style="opacity: 100 !important;" >
+
+
+                                </div>
                                 </div>
                                 <div class="form-actions">
-                                    <input type="submit" value="Add Product Attributes" class="btn btn-success">
+                                    <input type="submit" value="Add Product Images" class="btn btn-success">
                                 </div>
 
                             </form>
@@ -108,50 +107,34 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-                            <h5>Product Attributes</h5>
+                            <h5>ProductImages</h5>
                         </div>
                         <div class="widget-content nopadding">
                             <table class="table table-bordered data-table">
                                 <thead>
                                 <tr>
-                                    <th>Attribute Id</th>
-                                    <th>Sku</th>
-                                    <th>Size</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
+                                    <th>Product Image Id</th>
+                                    <th>Image</th>
                                     <th>Actions</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
-
-                                @foreach($product->productAttributes as $attribute)
-                                 
+                                @foreach($product->productImages as $image)
 
                                     <tr class="gradeU">
-                                        <form  action="{{url('admin/product/'.$product->id.'/attribute') }}" method="post">
-                                            {{csrf_field()}}
-                                        <td><input type="hidden" name="attribute_id" value="{{$attribute->id}}">{{$attribute->id}}</td>
-                                        <td><input type="text" name="old_sku" value="{{$attribute->sku}}"></td>
-                                        <td><input type="text" name="old_size" value="{{$attribute->size}}"></td>
-                                        <td><input type="text"  name="old_price" value="{{$attribute->price}}"></td>
-                                        <td><input type="text"  name="old_stock"value="{{$attribute->stock}}"></td>
+                                        <td>{{$image->id}}</td>
+                                         <td><img  width="60px" src="{{asset('storage/products/small/'.$image->product_image)}}" alt=""></td>
 
 
                                         <td>
-                                           
-                                           
-                                            <input class="btn btn-primary btn-mini" type="submit" value="Update">
 
-
-                                            <a rel="{{ $attribute->id }}" rel1="delete-product-attribute" href="javascript:" class="deleteRecord btn btn-danger btn-mini">Delete</a>
-                                            
+                                            <a rel="{{ $image->id }}" rel1="delete-product-image" href="javascript:" class="deleteRecord btn btn-danger btn-mini">Delete</a>
+                                           
                                         </td>
- </form>
+
                                     </tr>
                                 @endforeach
-
-                                           
                                 </tbody>
                             </table>
                         </div>

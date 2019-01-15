@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Product;
 use App\ProductAttribute;
+use App\ProductImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\GlobalController;
 use Illuminate\Support\Facades\Input;
@@ -54,7 +55,8 @@ class ProductController extends Controller
         $product->category_id=$request['category_id'];
         $image_name=GlobalController::upload([
             'file'=>'image',
-            'path'=>'products'
+            'path'=>'products',
+            'upload_type'=>'single'
         ]);
         $product->product_image=$image_name;
         $product->save();
@@ -73,6 +75,33 @@ class ProductController extends Controller
         $product=Product::find($id);
         return view('admin.products.show',compact(['product']));
     }
+
+    public function addProductImage($id)
+    {
+        //
+        $product=Product::find($id);
+        return view('admin.products.add-images',compact(['product']));
+    }
+    public function addProductImages(Request $request){
+            foreach ($request['image'] as $key=>$image) {
+              // dd(request()['image'][1]);
+                $productImage= new ProductImage;
+                $productImage->product_id=$request['product_id'];
+                $image_name=GlobalController::upload([
+                    'file'=>'image',
+                    'path'=>'products',
+                    'upload_type'=>'multiple',
+                    'index'=>$key,
+                    'data'=>$request['image'][$key],
+                ]);
+                //dd($image_name);
+                $productImage->product_image=$image_name;
+                $productImage->save();
+                
+            }
+             return redirect('/admin/product/'.$request['product_id'].'/images')->with('success','Product Images added successfully');
+    }
+  
 
     /**
      * Show the form for editing the specified resource.
@@ -107,7 +136,8 @@ class ProductController extends Controller
         $image_name=GlobalController::upload([
             'file'=>'image',
             'path'=>'products',
-            'delete_file'=>$product->product_image
+            'delete_file'=>$product->product_image,
+            'upload_type'=>'single'
         ]);
         $product->product_image=$image_name;
         $product->update();
@@ -126,7 +156,8 @@ class ProductController extends Controller
         GlobalController::upload([
             'file'=>'',
             'path'=>'products',
-            'delete_file'=>$product->product_image
+            'delete_file'=>$product->product_image,
+            'upload_type'=>'single'
         ]);
         $product->delete();
         return redirect('/admin/product')->with('success','Product deleted successfully');
@@ -159,6 +190,27 @@ class ProductController extends Controller
         //dd($id,$productAttr);
         $product_id=$productAttr->product_id;
         $productAttr->delete();
-        return redirect('admin/product/'.$product_id)->with('success','Product Attribute deletedsuccessfully');
+        return redirect('admin/product/'.$product_id)->with('success','Product Attribute deleted successfully');
+    }
+    public function destroyProductImage($id){
+        //dd(ProductAttribute::get());
+        $productImg=ProductImage::find($id);
+        //dd($id,$productAttr);
+        $product_id=$productImg->product_id;
+        $productImg->delete();
+        return redirect('admin/product/'.$product_id.'/images')->with('success','Product Image deleted successfully');
+    }
+
+    public function updateProductAttributes(Request $request,$product_id)
+    {
+         $productAttr=ProductAttribute::find($request['attribute_id']);
+         $productAttr->sku=$request['old_sku'];
+         $productAttr->price=$request['old_price'];
+         $productAttr->size=$request['old_size'];
+         $productAttr->stock=$request['old_stock'];
+
+         $productAttr->update();
+          return redirect('admin/product/'.$product_id)->with('success','Product Attribute updated successfully');
+        
     }
 }

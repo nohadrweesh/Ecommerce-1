@@ -27,7 +27,7 @@ $(document).ready(function(){
 
 	});
 	
-	$('input[type=checkbox],input[type=radio],input[type=file]').uniform();
+	//$('input[type=checkbox],input[type=radio],input[type=file]').uniform();
 	
 	//$('select').select2();
 
@@ -150,5 +150,7 @@ $(wrapper).on('click', '.remove_button', function(e){
 	$(this).parent('div').remove(); //Remove field html
 	x--; //Decrement field counter
 });
+
+
 
 });

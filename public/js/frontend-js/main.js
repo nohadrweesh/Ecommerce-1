@@ -27,4 +27,34 @@ $(document).ready(function(){
 	        zIndex: 2147483647 // Z-Index for the overlay
 		});
 	});
+
+$(document).on('change','#attribute-size_select',function(e){
+		var price=$(this).find(":checked").attr("data-price");
+		var stock=$(this).find(":checked").attr("data-stock");
+		//alert(stock);
+		console.log(price);
+		$('#product-price').text("US $"+price);
+		if(stock <=0){
+			//alert("hhh")
+			$('#stock_availabilty').text("Not Available");
+			$('#add_to_cart').prop('disabled', true);
+		}
+		else{
+			$('#stock_availabilty').text("In Stock");
+			$('#add_to_cart').prop('disabled', false);
+		}
+});
+
+$(document).on('click','.image-item img',function(e){
+	//console.log($(this).parent());
+	$('.main-image img').attr('src',e.target.src);
+	$('.image-item').each(function(i, obj) {
+		//console.log(obj);
+   		$(obj).removeClass('image-active');
+	});
+	$(this).parent().addClass('image-active');
+	//console.log(e.target.src);
+    //console.log($('.main-image img').attr('src',e.target.src));
+});
+
 });

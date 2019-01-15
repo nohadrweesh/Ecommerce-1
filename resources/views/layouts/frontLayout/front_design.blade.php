@@ -13,6 +13,7 @@
     <link href="{{asset('css/frontend-css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('css/frontend-css/main.css')}}" rel="stylesheet">
     <link href="{{asset('css/frontend-css/responsive.css')}}" rel="stylesheet">
+    <link href="{{asset('css/frontend-css/easyzoom.css')}}" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="{{asset('js/frontend-js/html5shiv.js')}}"></script>
     <script src="{{asset('js/frontend-js/respond.min.js')}}"></script>
@@ -38,5 +39,37 @@
 <script src="{{asset('js/frontend-js/price-range.js')}}"></script>
 <script src="{{asset('js/frontend-js/jquery.prettyPhoto.js')}}"></script>
 <script src="{{asset('js/frontend-js/main.js')}}"></script>
+<script src="{{asset('js/frontend-js/easyzoom.js')}}"></script>
+    <script>
+        // Instantiate EasyZoom instances
+        var $easyzoom = $('.easyzoom').easyZoom();
+
+        // Setup thumbnails example
+        var api1 = $easyzoom.filter('.easyzoom--with-thumbnails').data('easyZoom');
+
+        $('.thumbnails').on('click', 'a', function(e) {
+            var $this = $(this);
+
+            e.preventDefault();
+
+            // Use EasyZoom's `swap` method
+            api1.swap($this.data('standard'), $this.attr('href'));
+        });
+
+        // Setup toggles example
+        var api2 = $easyzoom.filter('.easyzoom--with-toggle').data('easyZoom');
+
+        $('.toggle').on('click', function() {
+            var $this = $(this);
+
+            if ($this.data("active") === true) {
+                $this.text("Switch on").data("active", false);
+                api2.teardown();
+            } else {
+                $this.text("Switch off").data("active", true);
+                api2._init();
+            }
+        });
+    </script>
 </body>
 </html>
