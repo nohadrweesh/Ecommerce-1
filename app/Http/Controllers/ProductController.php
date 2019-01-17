@@ -51,6 +51,7 @@ class ProductController extends Controller
         $product->product_code=$request['product_code'];
         $product->product_color=$request['product_color'];
         $product->product_description=$request['product_description'];
+        $product->product_care=$request['product_care'];
         $product->product_price=$request['product_price'];
         $product->category_id=$request['category_id'];
         $image_name=GlobalController::upload([
@@ -131,15 +132,18 @@ class ProductController extends Controller
         $product->product_code=$request['product_code'];
         $product->product_color=$request['product_color'];
         $product->product_description=$request['product_description'];
+        $product->product_care=$request['product_care'];
         $product->product_price=$request['product_price'];
         $product->category_id=$request['category_id'];
-        $image_name=GlobalController::upload([
-            'file'=>'image',
-            'path'=>'products',
-            'delete_file'=>$product->product_image,
-            'upload_type'=>'single'
-        ]);
-        $product->product_image=$image_name;
+        if($request['image'] !=null){
+            $image_name=GlobalController::upload([
+                'file'=>'image',
+                'path'=>'products',
+                'delete_file'=>$product->product_image,
+                'upload_type'=>'single'
+            ]);
+            $product->product_image=$image_name;
+    }
         $product->update();
         return redirect('admin/product')->with('success','Product added successfully');
     }

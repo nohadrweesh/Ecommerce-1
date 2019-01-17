@@ -44,6 +44,7 @@ class IndexController extends Controller
     {
         $product=Product::find($product_id);
         $categories=Category::where('parent_id',0)->get();
-        return view('front.product',compact(['product','categories']));
+        $recommendedItems=Product::where('id','!=',$product_id)->where('category_id',$product->category_id)->get();
+        return view('front.product',compact(['product','categories','recommendedItems']));
     }
 }

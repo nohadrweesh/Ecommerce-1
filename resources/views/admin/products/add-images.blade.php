@@ -65,6 +65,11 @@
 
                                 </div>
                                 @endif
+                                 <div class="control-group">
+                                    <label class="control-label">Material & Care</label>
+                                    <label  class="control-label"> <strong>{{$product->product_care}}</strong></label>
+
+                                </div>
                                 <div class="control-group">
                                     <label class="control-label">Product Price</label>
                                     <label  class="control-label"> <strong>{{$product->product_price}}</strong></label>

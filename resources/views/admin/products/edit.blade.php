@@ -55,6 +55,15 @@
                                         <textarea name="product_description" id="product_description" cols="30" rows="3">{{$product->product_description}}</textarea>
                                     </div>
                                 </div>
+
+                                <div class="control-group">
+                                <label class="control-label">Material & Care</label>
+                                <div class="controls">
+                                    <textarea name="product_care" id="product_care" cols="30" rows="3">
+                                        {{$product->product_care}}
+                                    </textarea>
+                                </div>
+                            </div>
                                 <div class="control-group">
                                     <label class="control-label">Product Price</label>
                                     <div class="controls">
